@@ -27,11 +27,11 @@
         }
 
         var color = cell.Col % 2 == 0 ? c0 : c1;
-        var classes = $"board-cell-c{color} board-cell";
+        var classes = new ClassSet($"board-cell-c{color} board-cell");
         if (cell.Piece != null && cell.Piece == Game.SelectedPiece.Value) {
-            classes += " board-cell-selected";
+            classes.Add("board-cell-selected");
         }
 
-        return classes;
+        return classes.ToString();
     }
 }

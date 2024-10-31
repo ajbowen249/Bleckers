@@ -9,12 +9,12 @@
 
 	private string Classes {
 		get {
-			var classes = $"piece-{(Model.Faction == Faction.Red ? "red" : "black")} piece";
+			var classes = new ClassSet($"piece-{(Model.Faction == Faction.Red ? "red" : "black")} piece");
 			if (CanSelect) {
-				classes += " piece-selectable";
+				classes.Add("piece-selectable");
 			}
 
-			return classes;
+			return classes.ToString();
 		}
 	}
 

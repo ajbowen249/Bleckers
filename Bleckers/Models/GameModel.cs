@@ -7,9 +7,14 @@ public class GameModel {
 	public AutoProp<Faction> FactionTurn = new AutoProp<Faction>(Faction.Black);
 	public AutoProp<PieceModel?> SelectedPiece = new AutoProp<PieceModel?>(null);
 
+	public Tuple<int, int>? SelectedLocation { get; private set; } = null;
+
 	public GameModel() {
-		FactionTurn.ValueChanged += (s, e) => OnStateChanged();
-		SelectedPiece.ValueChanged += (s, e) => OnStateChanged();
+		FactionTurn.ValueChanged += (s, v) => OnStateChanged();
+		SelectedPiece.ValueChanged += (s, v) => {
+			SelectedLocation = v == null ? null : FindPiece(v);
+			OnStateChanged();
+		};
 
 		var nextPieceId = 0;
 
@@ -49,5 +54,17 @@ public class GameModel {
 
 	private void OnStateChanged() {
 		StateChanged?.Invoke(this, EventArgs.Empty);
+	}
+
+	private Tuple<int, int> FindPiece(PieceModel piece) {
+		for (int row = 0; row < Board.Count; row++) {
+			for (int col = 0; col < Board[0].Count; col++) {
+				if (Board[row][col].Piece == piece) {
+					return new Tuple<int, int>(row, col);
+				}
+			}
+		}
+
+		throw new Exception("Piece not found on board.");
 	}
 }
