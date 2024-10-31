@@ -1,0 +1,19 @@
+﻿.piece-red {
+    --piece-color: red;
+}
+
+.piece-black {
+    --piece-color: black;
+}
+
+.piece {
+    background-color: var(--piece-color);
+    width: var(--piece-diameter);
+    height: var(--piece-diameter);
+    border-radius: 50%;
+    cursor: not-allowed;
+}
+
+.piece-selectable {
+    cursor: pointer;
+}

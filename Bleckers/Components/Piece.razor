@@ -1,0 +1,38 @@
+﻿<div @onclick="Toggle" class="@Classes">&nbsp;</div>
+
+@code {
+	[Parameter, EditorRequired]
+	public PieceModel Model { get; set; } = default!;
+
+	[Parameter, EditorRequired]
+	public GameModel Game { get; set; } = default!;
+
+	private string Classes {
+		get {
+			var classes = $"piece-{(Model.Faction == Faction.Red ? "red" : "black")} piece";
+			if (CanSelect) {
+				classes += " piece-selectable";
+			}
+
+			return classes;
+		}
+	}
+
+	private bool CanSelect {
+		get {
+			return Model.IsAlive && Game.FactionTurn.Value == Model.Faction;
+		}
+	}
+
+	private void Toggle() {
+		if (!CanSelect) {
+			return;
+		}
+
+		if (Game.FactionTurn.Value == Faction.Red) {
+			Game.FactionTurn.Value = Faction.Black;
+		} else {
+			Game.FactionTurn.Value = Faction.Red;
+		}
+	}
+}

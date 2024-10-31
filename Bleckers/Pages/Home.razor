@@ -1,0 +1,21 @@
+﻿@page "/"
+@using Bleckers.Components;
+
+<h1>@TurnHeader</h1>
+
+<Board Game="Game" />
+
+@code {
+    public GameModel Game = new GameModel { };
+
+    public string TurnHeader {
+        get {
+            return $"{(Game.FactionTurn.Value == Faction.Red ? "Red" : "Black")}'s Turn";
+        }
+    }
+
+    protected override void OnInitialized() {
+        base.OnInitialized();
+        Game.StateChanged += (s, a) => StateHasChanged();
+    }
+}

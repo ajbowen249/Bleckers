@@ -1,0 +1,28 @@
+﻿.board-outer {
+    --cell-size: calc(var(--piece-diameter) * 1.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.board-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.board-cell-c0 {
+    --cell-color: gray;
+}
+
+.board-cell-c1 {
+    --cell-color: lightgray;
+}
+
+.board-cell {
+    background-color: var(--cell-color);
+    width: var(--cell-size);
+    height: var(--cell-size);
+}
+
+.board-piece-container {
+    margin: calc(calc(var(--cell-size) - var(--piece-diameter)) / 2);
+}

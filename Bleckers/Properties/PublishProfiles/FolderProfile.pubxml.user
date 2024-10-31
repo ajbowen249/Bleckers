@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Hysco\Documents\Code\Personal\Bleckers\Bleckers\bin\Release\net8.0\browser-wasm\publish\</_PublishTargetUrl>
+    <History>True|2024-10-31T22:49:33.8355818Z;True|2024-10-31T18:48:33.0644452-04:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
