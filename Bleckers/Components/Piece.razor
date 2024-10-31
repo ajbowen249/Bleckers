@@ -1,4 +1,4 @@
-﻿<div @onclick="Toggle" class="@Classes">&nbsp;</div>
+﻿<div @onclick="Click" class="@Classes">&nbsp;</div>
 
 @code {
 	[Parameter, EditorRequired]
@@ -24,15 +24,11 @@
 		}
 	}
 
-	private void Toggle() {
+	private void Click() {
 		if (!CanSelect) {
 			return;
 		}
 
-		if (Game.FactionTurn.Value == Faction.Red) {
-			Game.FactionTurn.Value = Faction.Black;
-		} else {
-			Game.FactionTurn.Value = Faction.Red;
-		}
+		Game.SelectedPiece.Value = Model;
 	}
 }

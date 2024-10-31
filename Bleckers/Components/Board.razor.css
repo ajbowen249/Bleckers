@@ -23,6 +23,10 @@
     height: var(--cell-size);
 }
 
+.board-cell-selected {
+    background-color: red;
+}
+
 .board-piece-container {
     margin: calc(calc(var(--cell-size) - var(--piece-diameter)) / 2);
 }

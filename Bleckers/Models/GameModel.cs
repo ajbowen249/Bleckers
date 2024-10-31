@@ -1,13 +1,15 @@
 ﻿namespace Bleckers;
 
 public class GameModel {
+	public List<List<BoardCellModel>> Board = new List<List<BoardCellModel>>();
+	
 	public event EventHandler? StateChanged;
 	public AutoProp<Faction> FactionTurn = new AutoProp<Faction>(Faction.Black);
-
-	public List<List<BoardCellModel>> Board = new List<List<BoardCellModel>>();
+	public AutoProp<PieceModel?> SelectedPiece = new AutoProp<PieceModel?>(null);
 
 	public GameModel() {
 		FactionTurn.ValueChanged += (s, e) => OnStateChanged();
+		SelectedPiece.ValueChanged += (s, e) => OnStateChanged();
 
 		var nextPieceId = 0;
 
