@@ -1,66 +1,22 @@
-﻿@if (HasInitialized) {
-    <div class="board-outer">
-        @foreach (var row in GameBoard) {
-            <div class="board-row">
-                @foreach (var cell in row) {
-                    <div class="@GetBoardClass(cell)">
-                        @if (cell.Piece != null) {
-                            <div class="board-piece-container">
-                                <Piece Model="@cell.Piece" Game="Game" />
-                            </div>
-                        }
-                    </div>
-                }
-            </div>
-        }
-    </div>
-}
+﻿<div class="board-outer">
+    @foreach (var row in Game.Board) {
+        <div class="board-row">
+            @foreach (var cell in row) {
+                <div class="@GetBoardClass(cell)">
+                    @if (cell.Piece != null) {
+                        <div class="board-piece-container">
+                            <Piece Model="@cell.Piece" Game="Game" />
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+</div>
 
 @code {
     [Parameter, EditorRequired]
     public GameModel Game { get; set; } = default!;
-
-    private bool HasInitialized { get; set; } = false;
-    private List<List<BoardCellModel>> GameBoard { get; set; } = new List<List<BoardCellModel>>();
-
-    protected override void OnInitialized() {
-        var nextPieceId = 0;
-
-        for (int row = 0; row < Constants.BOARD_HEIGHT; row++) {
-            var cellRow = new List<BoardCellModel>();
-
-            for (int col = 0; col < Constants.BOARD_WIDTH; col++) {
-                var cellModel = new BoardCellModel { Row = row, Col = col };
-                var addPiece = false;
-
-                if (row != 3 && row != 4) {
-                    if (row != 1 && row != 6) {
-                        addPiece = col % 2 == 0;
-                    } else {
-                        addPiece = col % 2 != 0;
-                    }
-                }
-
-                if (addPiece) {
-                    var faction = row < 3 ? Faction.Black : Faction.Red;
-
-                    var piece = new PieceModel {
-                            ID = nextPieceId++,
-                            Faction = faction,
-                            IsAlive = true,
-                        };
-
-                    cellModel.Piece = piece;
-                }
-
-                cellRow.Add(cellModel);
-            }
-
-            GameBoard.Add(cellRow);
-        }
-
-        HasInitialized = true;
-    }
 
     string GetBoardClass(BoardCellModel cell) {
         var c0 = "0";
