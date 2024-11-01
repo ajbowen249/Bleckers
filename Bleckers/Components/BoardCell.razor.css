@@ -14,7 +14,7 @@
 }
 
 .board-cell-selected {
-    background-color: red;
+    background-color: blue;
 }
 
 .board-cell-can-move {

@@ -1,4 +1,10 @@
-﻿<div @onclick="Click" class="@Classes">&nbsp;</div>
+﻿<div @onclick="Click" class="@Classes">
+    @if (Model.IsKing) {
+        <span class="crown">👑</span>
+    } else {
+        <span>&nbsp;</span>
+    }
+</div>
 
 @code {
     [Parameter, EditorRequired]
@@ -20,7 +26,7 @@
 
     private bool CanSelect {
         get {
-            return Model.IsAlive && Game.FactionTurn.Value == Model.Faction;
+            return Game.FactionTurn.Value == Model.Faction;
         }
     }
 

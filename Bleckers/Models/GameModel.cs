@@ -26,11 +26,7 @@ public class GameModel {
     public GameModel() {
         FactionTurn.ValueChanged += (s, v) => OnStateChanged();
         FactionPieceCounts.ValueChanged += (s, v) => OnStateChanged();
-        SelectedPiece.ValueChanged += (s, v) => {
-            SelectedLocation = v == null ? null : FindPiece(v);
-            MovableLocations = GetMovableLocations();
-            OnStateChanged();
-        };
+        SelectedPiece.ValueChanged += (s, v) => UpdateSelectedPiece(v);
 
         var nextPieceId = 0;
 
@@ -55,7 +51,6 @@ public class GameModel {
                     var piece = new PieceModel {
                         ID = nextPieceId++,
                         Faction = faction,
-                        IsAlive = true,
                     };
 
                     cellModel.Piece = piece;
@@ -69,7 +64,7 @@ public class GameModel {
     }
 
     public void MoveSelectedPiece(MovementOption option) {
-        if (SelectedLocation == null) {
+        if (SelectedLocation == null || SelectedPiece.Value == null) {
             return;
         }
 
@@ -78,14 +73,30 @@ public class GameModel {
         toCell.Piece = fromCell.Piece;
         fromCell.Piece = null;
 
-        SelectedPiece.Value = null;
         if (option.CaptureCell != null) {
             option.CaptureCell.Piece = null;
             var pieceCount = FactionPieceCounts.Value[FactionTurn.Value] + 1;
             FactionPieceCounts.Value = FactionPieceCounts.Value.SetItem(FactionTurn.Value, pieceCount);
         }
 
-        FactionTurn.Value = FactionTurn.Value == Faction.Red ? Faction.Black : Faction.Red;
+        UpdateSelectedPiece(SelectedPiece.Value);
+
+        if (!SelectedPiece.Value.IsKing) {
+            if (
+                (SelectedPiece.Value.Faction == Faction.Red && option.Location.row == 0) ||
+                (SelectedPiece.Value.Faction == Faction.Black && option.Location.row == Constants.BOARD_HEIGHT - 1)
+             ) {
+                SelectedPiece.Value.IsKing = true;
+            }
+        }
+
+        UpdateSelectedPiece(SelectedPiece.Value);
+
+        // If we just captured a cell and can capture another, don't switch the turn
+        if (option.CaptureCell == null || MovableLocations == null || !MovableLocations.Any(x => x.CaptureCell != null)) {
+            SelectedPiece.Value = null;
+            FactionTurn.Value = FactionTurn.Value == Faction.Red ? Faction.Black : Faction.Red;
+        }
     }
 
     private void OnStateChanged() {
@@ -109,12 +120,24 @@ public class GameModel {
             return null;
         }
 
-        var deltas = new List<Location> {
+        var allDeltas = new List<Location> {
             new Location(-1, -1),
             new Location(-1,  1),
             new Location( 1, -1),
             new Location( 1,  1),
         };
+
+        var deltas = new List<Location>();
+
+        if (SelectedPiece.Value.IsKing) {
+            deltas = allDeltas;
+        } else {
+            if (SelectedPiece.Value.Faction == Faction.Red) {
+                deltas = new List<Location> { allDeltas[0], allDeltas[1] };
+            } else {
+                deltas = new List<Location> { allDeltas[2], allDeltas[3] };
+            }
+        }
 
         var options = new List<MovementOption>();
 
@@ -144,5 +167,11 @@ public class GameModel {
 
     private BoardCellModel GetLocation(Location location) {
         return Board[location.row][location.col];
+    }
+
+    private void UpdateSelectedPiece(PieceModel? piece) {
+        SelectedLocation = piece == null ? null : FindPiece(piece);
+        MovableLocations = GetMovableLocations();
+        OnStateChanged();
     }
 }
