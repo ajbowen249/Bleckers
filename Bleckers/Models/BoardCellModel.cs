@@ -1,6 +1,6 @@
 ﻿namespace Bleckers;
 public class BoardCellModel {
-    public Location Location { get; set; } = default!;
+    public required Location Location { get; set; }
 
     public PieceModel? Piece { get; set; } = null;
 }

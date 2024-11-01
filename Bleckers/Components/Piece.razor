@@ -2,10 +2,10 @@
 
 @code {
     [Parameter, EditorRequired]
-    public PieceModel Model { get; set; } = default!;
+    public required PieceModel Model { get; set; }
 
     [Parameter, EditorRequired]
-    public GameModel Game { get; set; } = default!;
+    public required GameModel Game { get; set; }
 
     private string Classes {
         get {

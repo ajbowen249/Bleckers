@@ -1,4 +1,4 @@
-﻿<div class="@Classes" @onclick="Click">
+<div class="@Classes" @onclick="Click">
     @if (Model.Piece != null) {
         <div class="board-piece-container">
             <Piece Model="@Model.Piece" Game="Game" />
@@ -8,10 +8,10 @@
 
 @code {
     [Parameter, EditorRequired]
-    public GameModel Game { get; set; } = default!;
+    public required GameModel Game { get; set; }
 
     [Parameter, EditorRequired]
-    public BoardCellModel Model { get; set; } = default!;
+    public required BoardCellModel Model { get; set; }
 
     private bool CanMoveHere {
         get {
