@@ -1,0 +1,27 @@
+﻿
+.board-cell-c0 {
+    --cell-color: gray;
+}
+
+.board-cell-c1 {
+    --cell-color: lightgray;
+}
+
+.board-cell {
+    background-color: var(--cell-color);
+    width: var(--cell-size);
+    height: var(--cell-size);
+}
+
+.board-cell-selected {
+    background-color: red;
+}
+
+.board-cell-can-move {
+    background-color: yellow;
+    cursor: pointer;
+}
+
+.board-piece-container {
+    margin: calc(calc(var(--cell-size) - var(--piece-diameter)) / 2);
+}

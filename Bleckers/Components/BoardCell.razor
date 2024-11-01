@@ -1,0 +1,53 @@
+﻿<div class="@Classes" @onclick="Click">
+    @if (Model.Piece != null) {
+        <div class="board-piece-container">
+            <Piece Model="@Model.Piece" Game="Game" />
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public GameModel Game { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public BoardCellModel Model { get; set; } = default!;
+
+    private bool CanMoveHere {
+        get {
+            return
+                Model.Piece == null
+                && Game.MovableLocations != null
+                && Game.MovableLocations.Any(x => x.Equals(Model.Location));
+        }
+    }
+
+    public string Classes {
+        get {
+            var c0 = "0";
+            var c1 = "1";
+            if (Model.Location.row % 2 == 0) {
+                c0 = "1";
+                c1 = "0";
+            }
+
+            var color = Model.Location.col % 2 == 0 ? c0 : c1;
+            var classes = new ClassSet($"board-cell-c{color} board-cell");
+            if (Model.Piece != null) {
+                if (Model.Piece == Game.SelectedPiece.Value) {
+                    classes.Add("board-cell-selected");
+                }
+            } else if (CanMoveHere) {
+                classes.Add("board-cell-can-move");
+            }
+
+            return classes.ToString();
+        }
+    }
+
+    public void Click() {
+        if (CanMoveHere) {
+            Game.MoveSelectedPiece(Model.Location);
+        }
+    }
+}

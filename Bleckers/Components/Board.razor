@@ -2,13 +2,7 @@
     @foreach (var row in Game.Board) {
         <div class="board-row">
             @foreach (var cell in row) {
-                <div class="@GetBoardClass(cell)">
-                    @if (cell.Piece != null) {
-                        <div class="board-piece-container">
-                            <Piece Model="@cell.Piece" Game="Game" />
-                        </div>
-                    }
-                </div>
+                <BoardCell Model="cell" Game="Game" />
             }
         </div>
     }
@@ -17,21 +11,4 @@
 @code {
     [Parameter, EditorRequired]
     public GameModel Game { get; set; } = default!;
-
-    string GetBoardClass(BoardCellModel cell) {
-        var c0 = "0";
-        var c1 = "1";
-        if (cell.Row % 2 == 0) {
-            c0 = "1";
-            c1 = "0";
-        }
-
-        var color = cell.Col % 2 == 0 ? c0 : c1;
-        var classes = new ClassSet($"board-cell-c{color} board-cell");
-        if (cell.Piece != null && cell.Piece == Game.SelectedPiece.Value) {
-            classes.Add("board-cell-selected");
-        }
-
-        return classes.ToString();
-    }
 }
