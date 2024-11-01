@@ -1,34 +1,34 @@
 ﻿<div @onclick="Click" class="@Classes">&nbsp;</div>
 
 @code {
-	[Parameter, EditorRequired]
-	public PieceModel Model { get; set; } = default!;
+    [Parameter, EditorRequired]
+    public PieceModel Model { get; set; } = default!;
 
-	[Parameter, EditorRequired]
-	public GameModel Game { get; set; } = default!;
+    [Parameter, EditorRequired]
+    public GameModel Game { get; set; } = default!;
 
-	private string Classes {
-		get {
-			var classes = new ClassSet($"piece-{(Model.Faction == Faction.Red ? "red" : "black")} piece");
-			if (CanSelect) {
-				classes.Add("piece-selectable");
-			}
+    private string Classes {
+        get {
+            var classes = new ClassSet($"piece-{(Model.Faction == Faction.Red ? "red" : "black")} piece");
+            if (CanSelect) {
+                classes.Add("piece-selectable");
+            }
 
-			return classes.ToString();
-		}
-	}
+            return classes.ToString();
+        }
+    }
 
-	private bool CanSelect {
-		get {
-			return Model.IsAlive && Game.FactionTurn.Value == Model.Faction;
-		}
-	}
+    private bool CanSelect {
+        get {
+            return Model.IsAlive && Game.FactionTurn.Value == Model.Faction;
+        }
+    }
 
-	private void Click() {
-		if (!CanSelect) {
-			return;
-		}
+    private void Click() {
+        if (!CanSelect) {
+            return;
+        }
 
-		Game.SelectedPiece.Value = Model;
-	}
+        Game.SelectedPiece.Value = Model;
+    }
 }
