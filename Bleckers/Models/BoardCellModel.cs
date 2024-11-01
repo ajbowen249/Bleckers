@@ -4,4 +4,3 @@ public class BoardCellModel {
 
     public PieceModel? Piece { get; set; } = null;
 }
-
