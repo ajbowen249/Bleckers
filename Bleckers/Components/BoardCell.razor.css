@@ -18,8 +18,12 @@
 }
 
 .board-cell-can-move {
-    background-color: yellow;
+    background-color: green;
     cursor: pointer;
+}
+
+.board-cell-can-capture {
+    background-color: yellow;
 }
 
 .board-piece-container {

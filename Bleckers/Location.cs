@@ -12,4 +12,12 @@ public class Location {
     public bool Equals(Location other) {
         return row == other.row && col == other.col;
     }
+
+    public bool IsInBoard() {
+        return row >= 0 && col >= 0 && row < Constants.BOARD_HEIGHT && col < Constants.BOARD_WIDTH;
+    }
+
+    public static Location operator +(Location left, Location right) {
+        return new Location(left.row + right.row, left.col + right.col);
+    }
 }

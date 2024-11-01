@@ -1,4 +1,4 @@
-<div class="@Classes" @onclick="Click">
+﻿<div class="@Classes" @onclick="Click">
     @if (Model.Piece != null) {
         <div class="board-piece-container">
             <Piece Model="@Model.Piece" Game="Game" />
@@ -13,12 +13,23 @@
     [Parameter, EditorRequired]
     public required BoardCellModel Model { get; set; }
 
-    private bool CanMoveHere {
+    private MovementOption? MovementOption {
         get {
-            return
-                Model.Piece == null
-                && Game.MovableLocations != null
-                && Game.MovableLocations.Any(x => x.Equals(Model.Location));
+            if (Model.Piece != null || Game.MovableLocations == null) {
+                return null;
+            }
+
+            return Game.MovableLocations.FirstOrDefault(x => x?.Location?.Equals(Model.Location) ?? false, null);
+        }
+    }
+
+    private bool CanCapture {
+        get {
+            if (Model.Piece == null || Game.MovableLocations == null) {
+                return false;
+            }
+
+            return Game.MovableLocations.FirstOrDefault(x =>x?.CaptureCell?.Location?.Equals(Model.Location) ?? false, null) != null;
         }
     }
 
@@ -36,8 +47,10 @@
             if (Model.Piece != null) {
                 if (Model.Piece == Game.SelectedPiece.Value) {
                     classes.Add("board-cell-selected");
+                } else if (CanCapture) {
+                    classes.Add("board-cell-can-capture");
                 }
-            } else if (CanMoveHere) {
+            } else if (MovementOption != null) {
                 classes.Add("board-cell-can-move");
             }
 
@@ -46,8 +59,9 @@
     }
 
     public void Click() {
-        if (CanMoveHere) {
-            Game.MoveSelectedPiece(Model.Location);
+        var opt = MovementOption;
+        if (opt != null) {
+            Game.MoveSelectedPiece(opt);
         }
     }
 }
