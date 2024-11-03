@@ -1,0 +1,23 @@
+﻿<div class="game-status-root">
+    <div class="turn-display">
+        <span>@FactionTurn</span><span>'s turn</span>
+    </div>
+
+    <div class="capture-display">
+        <h2>Captures</h2>
+
+        <div>Black: @Model.FactionPieceCounts.Value.GetValueOrDefault(Faction.Black, 0)</div>
+        <div>Red: @Model.FactionPieceCounts.Value.GetValueOrDefault(Faction.Red, 0)</div>
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public required GameModel Model { get; set; }
+
+    public string FactionTurn {
+        get {
+            return Model.FactionTurn.Value == Faction.Red ? "Red" : "Black";
+        }
+    }
+}
