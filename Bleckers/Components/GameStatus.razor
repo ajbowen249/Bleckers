@@ -1,18 +1,23 @@
 ﻿<div class="game-status-root">
-    <div class="turn-display">
-        @if (!Model.IsGameOver) {
-            <span>@FactionTurn</span><span>'s turn</span>
-        } else {
-            <span>@FactionTurn</span><span>&nbsp;Wins!</span>
-        }
-    </div>
-
     <div class="capture-display">
         <h2>Captures</h2>
 
         <div>Black: @Model.FactionCaptureCounts.Value.GetValueOrDefault(Faction.Black, 0)</div>
         <div>Red: @Model.FactionCaptureCounts.Value.GetValueOrDefault(Faction.Red, 0)</div>
+    </div>
 
+    <div class="turn-display">
+        @if (!Model.IsGameOver) {
+            <span>@FactionTurn</span>
+            <span>'s turn</span>
+        } else {
+            <span>@FactionTurn</span>
+
+            <span>&nbsp;Wins!</span>
+        }
+    </div>
+
+    <div>
         <ul class="status-buttons">
             <li><button class="btn btn-link" @onclick="OnResetGame">Reset</button></li>
             <li><a href="https://github.com/ajbowen249/Bleckers">GitHub</a></li>

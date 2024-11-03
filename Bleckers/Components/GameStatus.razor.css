@@ -1,17 +1,29 @@
 ﻿.game-status-root {
     background-color: #ede5f2;
     border-radius: 1rem;
-    padding: 1.5rem;
-    display: inline-block;
+    padding: .5rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     min-width: 15rem;
     font-family: cursive;
     margin-left: 16rem;
+    margin-right: 16rem;
     margin-top: 2rem;
+}
+
+.game-status-root > div {
+    text-align: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 2200px) {
+    .game-status-root {
+        margin: 0;
+    }
 }
 
 .turn-display {
     font-size: 25pt;
-    margin-bottom: 2rem;
 }
 
 .capture-display {
@@ -24,7 +36,29 @@
 }
 
 .status-buttons {
-    margin-top: 1rem;
     list-style-type: none;
     padding-left: 0;
+}
+
+@media only screen and (max-width: 1450px) {
+    .game-status-root {
+        min-width: 7.1rem;
+    }
+
+    .turn-display {
+        font-size: 15pt;
+        margin-bottom: 1rem;
+    }
+
+    .capture-display {
+        font-size: 10pt;
+    }
+
+    .capture-display > h2 {
+        font-size: 15pt;
+    }
+
+    .status-buttons {
+        margin-top: 0.5rem;
+    }
 }
