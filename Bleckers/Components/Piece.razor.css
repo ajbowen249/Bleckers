@@ -1,6 +1,6 @@
 ﻿.piece-container {
     --piece-inner-diameter: calc(var(--piece-diameter) * .9);
-    --perspective-margin: calc(var(--piece-inner-diameter) * .08);
+    --perspective-margin: calc(var(--piece-inner-diameter) * .04);
     cursor: not-allowed;
     width: var(--piece-diameter);
     height: var(--piece-diameter);
@@ -13,12 +13,16 @@
 
 .piece-red {
     --piece-color: red;
-    --piece-dark-color: #ab0000;
+    --piece-color-dark: #710000;
+    --piece-side-color: #c00000;
+    --piece-side-color-dark: #3c0000;
 }
 
 .piece-black {
     --piece-color: #3a3a3a;
-    --piece-dark-color: black;
+    --piece-color-dark: #101010;
+    --piece-side-color: #2d2d2d;
+    --piece-side-color-dark: #000000;
 }
 
 .piece-part-base {
@@ -27,7 +31,7 @@
 }
 
 .piece-top {
-    background-color: var(--piece-color);
+    background: linear-gradient(var(--light-angle), var(--piece-color), var(--piece-color-dark));
     height: var(--piece-inner-diameter);
     border-radius: 50%;
     position: absolute;
@@ -50,7 +54,7 @@
 }
 
 .piece-connector {
-    background-color: var(--piece-dark-color);
+    background-color: var(--piece-side-color);
     width: var(--piece-inner-diameter);
     height: var(--perspective-margin);
     position: absolute;
@@ -59,7 +63,7 @@
 }
 
 .piece-bottom {
-    background-color: var(--piece-dark-color);
+    background: linear-gradient(var(--light-angle), var(--piece-side-color), var(--piece-side-color-dark));
     width: var(--piece-inner-diameter);
     height: var(--piece-inner-diameter);
     border-radius: 50%;

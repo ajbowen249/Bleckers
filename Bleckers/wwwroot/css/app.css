@@ -1,5 +1,6 @@
 :root {
     --piece-diameter: 5rem;
+    --light-angle: 45deg;
 }
 
 html, body {
