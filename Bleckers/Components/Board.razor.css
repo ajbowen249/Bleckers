@@ -1,7 +1,34 @@
-﻿.board-outer {
+﻿.game-page-root {
+    width: 100%;
+}
+
+.game-table-container {
     --cell-size: calc(var(--piece-diameter) * 1.2);
+    --game-border-total-size: 1rem;
+    --game-board-size: calc(calc(var(--cell-size) * 8) + calc(var(--game-border-total-size) * 2));
+    --table-size: calc(var(--game-board-size) * 1.2);
+    transform-style: preserve-3d;
+    perspective-origin: 50% -60%;
+    perspective: 1500px;
+    width: var(--table-size);
+    height: var(--table-size);
+    margin-left: 25%;
+}
+
+.game-table {
+    width: var(--table-size);
+    height: var(--table-size);
+    transform: rotateX(90deg);
+    background-color: #57340f;
+    padding: calc(calc(var(--table-size) - var(--game-board-size)) / 2);
+}
+
+.board-outer {
     display: flex;
+    width: var(--game-board-size);
     flex-direction: column;
+    border: var(--game-border-total-size) solid white;
+    border-radius: 1rem;
 }
 
 .board-row {

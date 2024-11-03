@@ -1,24 +1,27 @@
 ﻿
 .board-cell-c0 {
-    --cell-color: gray;
+    --border-color: #000000;
+    --cell-color: #3d850b;
 }
 
 .board-cell-c1 {
-    --cell-color: lightgray;
+    --cell-color: #14290c;
+    --border-color: #000000;
 }
 
 .board-cell {
     background-color: var(--cell-color);
     width: var(--cell-size);
     height: var(--cell-size);
+    border: .2rem solid var(--border-color);
 }
 
 .board-cell-selected {
-    background-color: blue;
+    background-color: #0a2076;
 }
 
 .board-cell-can-move {
-    background-color: green;
+    background-color: #8918aa;
     cursor: pointer;
 }
 

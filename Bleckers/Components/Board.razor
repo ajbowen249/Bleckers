@@ -1,11 +1,17 @@
-﻿<div class="board-outer">
-    @foreach (var row in Game.Board) {
-        <div class="board-row">
-            @foreach (var cell in row) {
-                <BoardCell Model="cell" Game="Game" />
-            }
+﻿<div class="game-page-root">
+    <div class="game-table-container">
+        <div class="game-table">
+            <div class="board-outer">
+                @foreach (var row in Game.Board) {
+                    <div class="board-row">
+                        @foreach (var cell in row) {
+                            <BoardCell Model="cell" Game="Game" />
+                        }
+                    </div>
+                }
+            </div>
         </div>
-    }
+    </div>
 </div>
 
 @code {
