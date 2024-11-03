@@ -6,7 +6,7 @@
     --cell-size: calc(var(--piece-diameter) * 1.2);
     --game-border-total-size: 1rem;
     --game-board-size: calc(calc(var(--cell-size) * 8) + calc(var(--game-border-total-size) * 2));
-    --table-size: calc(var(--game-board-size) * 1.2);
+    --table-size: calc(var(--game-board-size) * 1.14);
     transform-style: preserve-3d;
     perspective-origin: 50% -60%;
     perspective: 1500px;
@@ -22,6 +22,7 @@
     background-color: #57340f;
     padding: calc(calc(var(--table-size) - var(--game-board-size)) / 2);
     margin-top: -12rem;
+    border-radius: 1rem;
 }
 
 .board-outer {
@@ -35,4 +36,27 @@
 .board-row {
     display: flex;
     flex-direction: row;
+}
+
+@media only screen and (max-width: 1024px) {
+    .game-table-container {
+        --table-size: calc(var(--game-board-size) * 1.1);
+    }
+
+   .game-table {
+        transform: rotateX(60deg);
+        margin-top: -4rem;
+    }
+}
+
+@media only screen and (max-width: 660px) {
+    .game-table-container {
+        --table-size: calc(var(--game-board-size) * 1);
+    }
+
+    .game-table {
+        background-color: transparent;
+        transform: rotateX(30deg);
+        margin-top: 0rem;
+    }
 }

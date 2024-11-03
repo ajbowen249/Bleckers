@@ -7,14 +7,16 @@
     </div>
 
     <div class="turn-display">
-        @if (!Model.IsGameOver) {
-            <span>@FactionTurn</span>
-            <span>'s turn</span>
-        } else {
-            <span>@FactionTurn</span>
+        <div>
+            @if (!Model.IsGameOver) {
+                <span>@FactionTurn</span>
+                <span>'s turn</span>
+            } else {
+                <span>@FactionTurn</span>
 
-            <span>&nbsp;Wins!</span>
-        }
+                <span>&nbsp;Wins!</span>
+            }
+        </div>
     </div>
 
     <div>

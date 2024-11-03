@@ -24,6 +24,14 @@
 
 .turn-display {
     font-size: 25pt;
+    position: relative;
+}
+
+.turn-display > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .capture-display {
@@ -41,13 +49,18 @@
 }
 
 @media only screen and (max-width: 1450px) {
+    .status-buttons {
+        margin-top: 0.5rem;
+    }
+}
+
+@media only screen and (max-width: 660px) {
     .game-status-root {
         min-width: 7.1rem;
     }
 
     .turn-display {
-        font-size: 15pt;
-        margin-bottom: 1rem;
+        font-size: 10pt;
     }
 
     .capture-display {
@@ -55,7 +68,7 @@
     }
 
     .capture-display > h2 {
-        font-size: 15pt;
+        font-size: 10pt;
     }
 
     .status-buttons {

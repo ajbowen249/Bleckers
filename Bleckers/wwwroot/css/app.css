@@ -24,6 +24,28 @@ a, .btn-link {
     font-size: 14pt;
 }
 
+@media only screen and (max-width: 1024px) {
+    :root {
+        --piece-diameter: 3rem;
+    }
+
+    a, .btn-link {
+        font-size: 10pt;
+    }
+}
+
+@media only screen and (max-width: 660px) {
+    :root {
+        --piece-diameter: 2rem;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    :root {
+        --piece-diameter: 1.5rem;
+    }
+}
+
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
