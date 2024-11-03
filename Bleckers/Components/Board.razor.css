@@ -21,7 +21,7 @@
     transform: rotateX(90deg);
     background-color: #57340f;
     padding: calc(calc(var(--table-size) - var(--game-board-size)) / 2);
-    margin-top: -10rem;
+    margin-top: -20rem;
 }
 
 .board-outer {

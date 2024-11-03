@@ -5,6 +5,8 @@
     display: inline-block;
     min-width: 15rem;
     font-family: cursive;
+    margin-left: 16rem;
+    margin-top: 2rem;
 }
 
 .turn-display {
