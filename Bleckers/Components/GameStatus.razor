@@ -1,13 +1,17 @@
 ﻿<div class="game-status-root">
     <div class="turn-display">
-        <span>@FactionTurn</span><span>'s turn</span>
+        @if (!Model.IsGameOver) {
+            <span>@FactionTurn</span><span>'s turn</span>
+        } else {
+            <span>@FactionTurn</span><span>&nbsp;Wins!</span>
+        }
     </div>
 
     <div class="capture-display">
         <h2>Captures</h2>
 
-        <div>Black: @Model.FactionPieceCounts.Value.GetValueOrDefault(Faction.Black, 0)</div>
-        <div>Red: @Model.FactionPieceCounts.Value.GetValueOrDefault(Faction.Red, 0)</div>
+        <div>Black: @Model.FactionCaptureCounts.Value.GetValueOrDefault(Faction.Black, 0)</div>
+        <div>Red: @Model.FactionCaptureCounts.Value.GetValueOrDefault(Faction.Red, 0)</div>
     </div>
 </div>
 

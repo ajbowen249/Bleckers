@@ -13,7 +13,7 @@ public class GameModel {
     public event EventHandler? StateChanged;
     public AutoProp<Faction> FactionTurn = new AutoProp<Faction>(Faction.Black);
     public AutoProp<PieceModel?> SelectedPiece = new AutoProp<PieceModel?>(null);
-    public AutoProp<ImmutableDictionary<Faction, int>> FactionPieceCounts = new AutoProp<ImmutableDictionary<Faction, int>>(
+    public AutoProp<ImmutableDictionary<Faction, int>> FactionCaptureCounts = new AutoProp<ImmutableDictionary<Faction, int>>(
         new Dictionary<Faction, int> {
             { Faction.Black, 0 },
             { Faction.Red, 0 },
@@ -24,6 +24,14 @@ public class GameModel {
     public List<MovementOption>? MovableLocations { get; private set; } = null;
     
     private bool _capturedLastTurn = false;
+    private int _initialPiecesBlack = 0;
+    private int _initialPiecesRed = 0;
+
+    public bool IsGameOver {
+        get {
+            return FactionCaptureCounts.Value[Faction.Black] == _initialPiecesRed || FactionCaptureCounts.Value[Faction.Red] == _initialPiecesBlack;
+        }
+    }
 
     public GameModel() {
         FactionTurn.ValueChanged += (s, v) => {
@@ -31,7 +39,7 @@ public class GameModel {
             OnStateChanged();
         };
 
-        FactionPieceCounts.ValueChanged += (s, v) => OnStateChanged();
+        FactionCaptureCounts.ValueChanged += (s, v) => OnStateChanged();
         SelectedPiece.ValueChanged += (s, v) => UpdateSelectedPiece(v);
 
         var nextPieceId = 0;
@@ -60,6 +68,12 @@ public class GameModel {
                     };
 
                     cellModel.Piece = piece;
+
+                    if (faction == Faction.Black) {
+                        _initialPiecesBlack++;
+                    } else {
+                        _initialPiecesRed++;
+                    }
                 }
 
                 cellRow.Add(cellModel);
@@ -81,8 +95,8 @@ public class GameModel {
 
         if (option.CaptureCell != null) {
             option.CaptureCell.Piece = null;
-            var pieceCount = FactionPieceCounts.Value[FactionTurn.Value] + 1;
-            FactionPieceCounts.Value = FactionPieceCounts.Value.SetItem(FactionTurn.Value, pieceCount);
+            var pieceCount = FactionCaptureCounts.Value[FactionTurn.Value] + 1;
+            FactionCaptureCounts.Value = FactionCaptureCounts.Value.SetItem(FactionTurn.Value, pieceCount);
             _capturedLastTurn = true;
         }
 
@@ -100,7 +114,7 @@ public class GameModel {
         UpdateSelectedPiece(SelectedPiece.Value);
 
         // If we just captured a cell and can capture another, don't switch the turn
-        if (option.CaptureCell == null || MovableLocations == null || !MovableLocations.Any(x => x.CaptureCell != null)) {
+        if (!IsGameOver && (option.CaptureCell == null || MovableLocations == null || !MovableLocations.Any(x => x.CaptureCell != null))) {
             SelectedPiece.Value = null;
             FactionTurn.Value = FactionTurn.Value == Faction.Red ? Faction.Black : Faction.Red;
         }
