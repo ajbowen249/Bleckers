@@ -22,9 +22,15 @@ public class GameModel {
 
     public Location? SelectedLocation { get; private set; } = null;
     public List<MovementOption>? MovableLocations { get; private set; } = null;
+    
+    private bool _capturedLastTurn = false;
 
     public GameModel() {
-        FactionTurn.ValueChanged += (s, v) => OnStateChanged();
+        FactionTurn.ValueChanged += (s, v) => {
+            _capturedLastTurn = false;
+            OnStateChanged();
+        };
+
         FactionPieceCounts.ValueChanged += (s, v) => OnStateChanged();
         SelectedPiece.ValueChanged += (s, v) => UpdateSelectedPiece(v);
 
@@ -77,6 +83,7 @@ public class GameModel {
             option.CaptureCell.Piece = null;
             var pieceCount = FactionPieceCounts.Value[FactionTurn.Value] + 1;
             FactionPieceCounts.Value = FactionPieceCounts.Value.SetItem(FactionTurn.Value, pieceCount);
+            _capturedLastTurn = true;
         }
 
         UpdateSelectedPiece(SelectedPiece.Value);
@@ -160,6 +167,10 @@ public class GameModel {
                     });
                 }
             }
+        }
+
+        if (_capturedLastTurn) {
+            options = options.Where(x => x.CaptureCell != null).ToList();
         }
 
         return options;
