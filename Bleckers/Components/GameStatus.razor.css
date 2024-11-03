@@ -1,9 +1,10 @@
 ﻿.game-status-root {
-    background-color: #fbf7d1;
+    background-color: #ede5f2;
     border-radius: 1rem;
     padding: 1.5rem;
     display: inline-block;
-    min-width: 14rem;
+    min-width: 15rem;
+    font-family: cursive;
 }
 
 .turn-display {
@@ -11,8 +12,8 @@
     margin-bottom: 2rem;
 }
 
-.capture-display {
-    
+.capture-display > div {
+    font-size: 15pt;
 }
 
 .capture-display > h2 {
