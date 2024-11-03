@@ -1,40 +1,546 @@
-﻿<div @onclick="Click" class="@Classes">
-    @if (Model.IsKing) {
-        <span class="crown">👑</span>
-    } else {
-        <span>&nbsp;</span>
-    }
+﻿<div @onclick="Click" class="@OuterClasses">
+	<div class="piece-part-base piece-bottom">
+		&nbsp;
+	</div>
+
+	<div class="piece-part-base piece-connector">
+		&nbsp;
+	</div>
+
+	<div class="piece-top">
+		<div class="piece-part-base piece-top-inner">
+			@if (Model.IsKing)
+			{
+				<span class="crown">👑</span>
+			}
+			else
+			{
+				<span>&nbsp;</span>
+			}
+		</div>
+	</div>
 </div>
 
 @code {
-    [Parameter, EditorRequired]
-    public required PieceModel Model { get; set; }
+	[Parameter, EditorRequired]
 
-    [Parameter, EditorRequired]
-    public required GameModel Game { get; set; }
 
-    private string Classes {
-        get {
-            var classes = new ClassSet($"piece-{(Model.Faction == Faction.Red ? "red" : "black")} piece");
-            if (CanSelect) {
-                classes.Add("piece-selectable");
-            }
 
-            return classes.ToString();
-        }
-    }
 
-    private bool CanSelect {
-        get {
-            return Game.FactionTurn.Value == Model.Faction;
-        }
-    }
 
-    private void Click() {
-        if (!CanSelect) {
-            return;
-        }
 
-        Game.SelectedPiece.Value = Model;
-    }
+
+
+
+
+
+
+
+
+
+	public required PieceModel Model { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	[Parameter, EditorRequired]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public required GameModel Game { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	private string OuterClasses
+
+
+
+
+
+
+
+	{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		get
+
+
+
+
+
+
+
+		{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			var classes = new ClassSet($"piece-container piece-{(Model.Faction == Faction.Red ? "red" : "black")}");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			if (CanSelect)
+
+
+
+
+
+
+
+			{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				classes.Add("piece-selectable");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			return classes.ToString();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	private bool CanSelect
+
+
+
+
+
+
+
+	{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		get
+
+
+
+
+
+
+
+		{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			return Game.FactionTurn.Value == Model.Faction;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	private void Click()
+
+
+
+
+
+
+
+	{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		if (!CanSelect)
+
+
+
+
+
+
+
+		{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			return;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		Game.SelectedPiece.Value = Model;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}
 }

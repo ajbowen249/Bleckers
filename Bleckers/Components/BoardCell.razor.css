@@ -26,9 +26,9 @@
 }
 
 .board-cell-can-capture {
-    background-color: yellow;
+    background-color: #e8c500;
 }
 
 .board-piece-container {
-    margin: calc(calc(var(--cell-size) - var(--piece-diameter)) / 2);
+    margin: calc(calc(var(--cell-size) - var(--piece-diameter)) / 4);
 }

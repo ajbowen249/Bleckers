@@ -1,17 +1,9 @@
-﻿.piece-red {
-    --piece-color: red;
-}
-
-.piece-black {
-    --piece-color: black;
-}
-
-.piece {
-    background-color: var(--piece-color);
+﻿.piece-container {
+    --piece-inner-diameter: calc(var(--piece-diameter) * .9);
+    --perspective-margin: calc(var(--piece-inner-diameter) * .08);
+    cursor: not-allowed;
     width: var(--piece-diameter);
     height: var(--piece-diameter);
-    border-radius: 50%;
-    cursor: not-allowed;
     position: relative;
 }
 
@@ -19,11 +11,59 @@
     cursor: pointer;
 }
 
+.piece-red {
+    --piece-color: red;
+    --piece-dark-color: #ab0000;
+}
+
+.piece-black {
+    --piece-color: #3a3a3a;
+    --piece-dark-color: black;
+}
+
+.piece-part-base {
+    position: absolute;
+    left: calc(calc(var(--piece-diameter) - var(--piece-inner-diameter)) / 2);
+}
+
+.piece-top {
+    background-color: var(--piece-color);
+    height: var(--piece-inner-diameter);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: calc(calc(var(--piece-diameter) - var(--piece-inner-diameter)) / 2);
+}
+
+.piece-top-inner {
+    position: relative;
+    width: var(--piece-inner-diameter);
+    height: var(--piece-inner-diameter);
+}
+
 .crown {
-    margin: 0;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 45%;
     transform: translate(-50%, -50%);
     font-size: 25px;
+}
+
+.piece-connector {
+    background-color: var(--piece-dark-color);
+    width: var(--piece-inner-diameter);
+    height: var(--perspective-margin);
+    position: absolute;
+    top: calc(calc(var(--piece-inner-diameter) - calc(var(--perspective-margin))) / 2);
+    left: calc(calc(var(--piece-diameter) - var(--piece-inner-diameter)) / 2);
+}
+
+.piece-bottom {
+    background-color: var(--piece-dark-color);
+    width: var(--piece-inner-diameter);
+    height: var(--piece-inner-diameter);
+    border-radius: 50%;
+    position: absolute;
+    top: var(--perspective-margin);
+    left: calc(calc(var(--piece-diameter) - var(--piece-inner-diameter)) / 2);
 }
