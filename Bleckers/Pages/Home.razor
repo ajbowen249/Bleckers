@@ -1,14 +1,19 @@
 ﻿@page "/"
 @using Bleckers.Components;
 
-<GameStatus Model="Game" />
+<GameStatus Model="Game" OnResetGame="() => ResetGame()" />
 
 <Board Game="Game" />
 
 @code {
-    public GameModel Game = new GameModel { };
+    private GameModel Game = new GameModel();
     protected override void OnInitialized() {
         base.OnInitialized();
+        Game.StateChanged += (s, a) => StateHasChanged();
+    }
+
+    private void ResetGame() {
+        Game = new GameModel();
         Game.StateChanged += (s, a) => StateHasChanged();
     }
 }

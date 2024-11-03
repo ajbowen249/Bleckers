@@ -12,12 +12,21 @@
 
         <div>Black: @Model.FactionCaptureCounts.Value.GetValueOrDefault(Faction.Black, 0)</div>
         <div>Red: @Model.FactionCaptureCounts.Value.GetValueOrDefault(Faction.Red, 0)</div>
+
+        <ul class="status-buttons">
+            <li><button class="btn btn-link" @onclick="OnResetGame">Reset</button></li>
+            <li><a href="https://github.com/ajbowen249/Bleckers">GitHub</a></li>
+            <li><a href="https://ajbowen249.github.io/portfolio/">More</a></li>
+        </ul>
     </div>
 </div>
 
 @code {
     [Parameter, EditorRequired]
     public required GameModel Model { get; set; }
+
+    [Parameter, EditorRequired]
+    public required Action OnResetGame { get; set; }
 
     public string FactionTurn {
         get {

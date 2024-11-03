@@ -14,11 +14,17 @@
     margin-bottom: 2rem;
 }
 
-.capture-display > div {
+.capture-display {
     font-size: 15pt;
 }
 
 .capture-display > h2 {
     font-size: 20pt;
     text-decoration: underline;
+}
+
+.status-buttons {
+    margin-top: 1rem;
+    list-style-type: none;
+    padding-left: 0;
 }

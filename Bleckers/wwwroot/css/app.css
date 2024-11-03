@@ -13,7 +13,9 @@ h1:focus {
 }
 
 a, .btn-link {
-    color: #0071c1;
+    color: black;
+    padding: 0;
+    font-size: 16px;
 }
 
 .btn-primary {
