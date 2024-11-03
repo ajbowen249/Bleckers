@@ -13,9 +13,9 @@
 
 .piece-red {
     --piece-color: red;
-    --piece-color-dark: #710000;
+    --piece-color-dark: #3f0000;
     --piece-side-color: #c00000;
-    --piece-side-color-dark: #3c0000;
+    --piece-side-color-dark: #280000;
 }
 
 .piece-black {
