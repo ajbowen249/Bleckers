@@ -119,3 +119,7 @@ a, .btn-link {
 .loading-text:after {
     content: var(--blazor-load-percentage-text, "0%");
 }
+
+.ios-disclaimer {
+    font-size: 15pt;
+}
