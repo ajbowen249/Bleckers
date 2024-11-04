@@ -97,6 +97,12 @@
     margin: calc(calc(var(--cell-size) - var(--piece-diameter)) / 4);
 }
 
+@media only screen and (max-width: 660px) {
+    .board-cell[b-5srsr6n7az] {
+        border: .1rem solid var(--border-color);
+    }
+}
+
 @media only screen and (max-width: 380px) {
     .board-piece-container[b-5srsr6n7az] {
         margin: 0;
